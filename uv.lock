@@ -265,6 +265,9 @@ wheels = [
 name = "discord-ram"
 version = "0.1.0"
 source = { editable = "." }
+dependencies = [
+    { name = "ramx" },
+]
 
 [package.optional-dependencies]
 speedups = [
@@ -272,7 +275,10 @@ speedups = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ramx", extras = ["speedups"], marker = "extra == 'speedups'", editable = "libs/ramx" }]
+requires-dist = [
+    { name = "ramx", editable = "libs/ramx" },
+    { name = "ramx", extras = ["speedups"], marker = "extra == 'speedups'", editable = "libs/ramx" },
+]
 provides-extras = ["speedups"]
 
 [[package]]
