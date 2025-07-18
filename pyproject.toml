@@ -1,28 +1,22 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "discord-ram"
 version = "0.1.0"
-description = "Scalable Discord API framework"
-readme = "README.md"
-authors = [
-    { name = "stefanlight8", email = "64615032+stefanlight8@users.noreply.github.com" },
-]
-requires-python = ">=3.10, <3.13"
-dependencies = [
-    "ramx",
-]
+description = "..."
+license = { file = "LICENSE" }
+requires-python = ">=3.10,<3.13"
+dependencies = ["ramx"]
 
 [project.optional-dependencies]
-speedups = ["ramx[speedups]"]
+full = ["ram"]
+
+[project.urls]
+Repository = "https://github.com/discord-ram/discord-ram"
+Issues = "https://github.com/discord-ram/discord-ram/issues"
+Changelog = "https://github.com/discord-ram/discord-ram/blob/main/CHANGELOG.md"
 
 [tool.uv.workspace]
-members = ["libs/ramx"]
+members = ["ramx", "ram", "examples/bot"]
 
 [tool.uv.sources]
 ramx = { workspace = true }
-
-[tool.hatch.build.targets.wheel]
-packages = ["libs/ramx"]
+ram = { workspace = true }

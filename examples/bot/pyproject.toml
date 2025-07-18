@@ -1,0 +1,20 @@
+[project]
+name = "bot"
+version = "0.1.0"
+description = "example bot"
+authors = [
+    { name = "stefanlight8", email = "64615032+stefanlight8@users.noreply.github.com" },
+]
+requires-python = ">=3.10,<3.13"
+dependencies = ["discord-ram", "minenv"]
+
+[project.scripts]
+bot = "bot:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+minenv = { git = "https://github.com/stefanlight8/minenv" }
+discord-ram = { workspace = true }
