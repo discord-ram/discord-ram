@@ -1,20 +1,24 @@
 [project]
-name = "bot"
+name = "example-bot"
 version = "0.1.0"
-description = "example bot"
+description = "Example of bot using ramx"
+readme = "README.md"
 authors = [
     { name = "stefanlight8", email = "64615032+stefanlight8@users.noreply.github.com" },
 ]
-requires-python = ">=3.10,<3.13"
-dependencies = ["discord-ram", "minenv"]
+requires-python = ">=3.10, <3.13"
+dependencies = ["ramx"]
 
 [project.scripts]
-bot = "bot:main"
+example-bot-ramx = "bot:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/bot"]
+
 [tool.uv.sources]
-minenv = { git = "https://github.com/stefanlight8/minenv" }
 discord-ram = { workspace = true }
+ramx = { path = "../../" }         # :(

@@ -15,7 +15,7 @@ Issues = "https://github.com/discord-ram/discord-ram/issues"
 Changelog = "https://github.com/discord-ram/discord-ram/blob/main/CHANGELOG.md"
 
 [tool.uv.workspace]
-members = ["ramx", "ram", "examples/bot"]
+members = ["ramx", "ram", "ramx/examples/bot"]
 
 [tool.uv.sources]
 ramx = { workspace = true }
