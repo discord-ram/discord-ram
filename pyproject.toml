@@ -1,0 +1,17 @@
+[project]
+name = "discord-ram"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "stefanlight8", email = "64615032+stefanlight8@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.13.2",
+    "msgspec>=0.20.0",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
