@@ -3,10 +3,10 @@ import logging
 from typing import Any
 
 from aiohttp import ClientWebSocketResponse, WSMessage, WSMsgType
-from msgspec.json import Encoder, Decoder
+from msgspec.json import Decoder, Encoder
 
+from ram.gateway._frame import GatewayFrame
 from ram.gateway.exceptions import GatewayTransportClosed
-from ram.gateway.gateway_payload import GatewayPayload
 from ram.ws.transport import WebsocketTransport
 
 
@@ -28,15 +28,17 @@ class GatewayTransport(WebsocketTransport):
         self._logger: logging.Logger = logging.getLogger("ram.transport")
 
         self._encoder: Encoder = Encoder()
-        self._decoder: Decoder[dict[str, Any]] = Decoder(dict[str, Any])
+        self._decoder: Decoder[GatewayFrame[Any]] = Decoder(GatewayFrame)
 
-    async def receive(self) -> dict[str, Any]:
+    async def receive(self) -> GatewayFrame[Any]:
         message: WSMessage = await self.connection.receive()
+        #self._logger.debug("received: %r", message)
         if message.type in {WSMsgType.ERROR, WSMsgType.CLOSE, WSMsgType.CLOSED}:
             raise GatewayTransportClosed(code=message.data, extra=message.extra)
         else:
             return self._decoder.decode(message.data)
 
-    async def send(self, payload: GatewayPayload) -> None:
+    async def send(self, payload: GatewayFrame[Any]) -> None:
         data: bytes = self._encoder.encode(payload)
         await self.connection.send_bytes(data)
+        #self._logger.debug("send: %r", payload)

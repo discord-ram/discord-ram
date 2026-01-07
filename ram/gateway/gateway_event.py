@@ -1,10 +1,6 @@
-from typing import Generic, TypeVar
-
-import msgspec
-
-EventT = TypeVar("EventT", bound=msgspec.Struct)
+from msgspec import Struct
 
 
-class GatewayEvent(msgspec.Struct, Generic[EventT], tag_field="t"):
-    data: EventT = msgspec.field(name="d")
-    seq: int = msgspec.field(name="s")
+class GatewayEvent[EventT: Struct](Struct, tag_field="t"):
+    d: EventT
+    s: int
